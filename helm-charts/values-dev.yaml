@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: sambitpritamnayak/simple-mvn-dev
+  pullPolicy: IfNotPresent
+  tag: "1.21.1"
+
+imagePullSecrets: []
+nameOverride: "dev-app"
+fullnameOverride: "dev-deployment"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+
